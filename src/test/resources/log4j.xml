@@ -20,7 +20,10 @@
         </layout>
     </appender>
     <logger name="org.eclipse.jetty">
-        <level value="off"/>
+        <level value="debug"/>
+    </logger>
+    <logger name="io.netty">
+        <level value="debug"/>
     </logger>
     <logger name="org.littleshoot.proxy">
         <level value="info"/>
