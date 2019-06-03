@@ -1,11 +1,16 @@
-sudo: false
-
 language: java
+sudo: false
 dist: xenial
-jdk:
-  - openjdk8
-  - openjdk11
+
+jobs:
+  include:
+    - stage: OpenJDK 11.0.3
+      env: JDK=11 + Hotspot
+      script:
+      - mvn --version
+      - export
+      - mvn clean test -Dtest="BadClientAuthenticationTCPChainedProxyTest"
 
 cache:
-    directories:
+  directories:
     - $HOME/.m2
