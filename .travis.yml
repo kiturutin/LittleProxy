@@ -6,6 +6,7 @@ jobs:
   include:
     - stage: OpenJDK 11.0.3
       env: JDK=11 + Hotspot
+      jdk: openjdk11
       script:
       - mvn --version
       - export
