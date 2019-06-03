@@ -3,7 +3,7 @@ sudo: false
 language: java
 dist: xenial
 jdk:
-  - oraclejdk8
+  - openjdk8
   - openjdk11
 
 cache:
