@@ -720,11 +720,6 @@ public class ClientToProxyConnection extends ProxyConnection<HttpRequest> {
     @Override
     protected void exceptionCaught(Throwable cause) {
         try {
-            try {
-                Thread.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             if (cause instanceof IOException) {
                 // IOExceptions are expected errors, for example when a browser is killed and aborts a connection.
                 // rather than flood the logs with stack traces for these expected exceptions, we log the message at the
