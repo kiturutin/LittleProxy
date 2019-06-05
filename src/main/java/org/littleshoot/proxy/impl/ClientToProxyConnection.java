@@ -735,6 +735,7 @@ public class ClientToProxyConnection extends ProxyConnection<HttpRequest> {
         } finally {
             // always disconnect the client when an exception occurs on the channel
             disconnect();
+            throw new RuntimeException(cause);
         }
     }
 

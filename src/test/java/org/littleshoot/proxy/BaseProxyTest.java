@@ -10,25 +10,22 @@ import org.junit.Test;
  * configurations of the proxy (e.g. single versus chained, tunneling, etc.).
  */
 public abstract class BaseProxyTest extends AbstractProxyTest {
-    @Test
+
     public void testSimpleGetRequest() throws Exception {
         lastResponse =
                 compareProxiedAndUnproxiedGET(webHost, DEFAULT_RESOURCE);
     }
 
-    @Test
     public void testSimpleGetRequestOverHTTPS() throws Exception {
         lastResponse =
                 compareProxiedAndUnproxiedGET(httpsWebHost, DEFAULT_RESOURCE);
     }
 
-    @Test
     public void testSimplePostRequest() throws Exception {
         lastResponse =
                 compareProxiedAndUnproxiedPOST(webHost, DEFAULT_RESOURCE);
     }
 
-    @Test
     public void testSimplePostRequestOverHTTPS() throws Exception {
         lastResponse =
                 compareProxiedAndUnproxiedPOST(httpsWebHost, DEFAULT_RESOURCE);
@@ -40,7 +37,6 @@ public abstract class BaseProxyTest extends AbstractProxyTest {
      * 
      * @throws Exception
      */
-    @Test
     public void testHeadRequestFollowedByGet() throws Exception {
         httpGetWithApacheClient(webHost, DEFAULT_RESOURCE, true, true);
     }

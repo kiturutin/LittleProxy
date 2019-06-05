@@ -52,6 +52,7 @@ public abstract class BaseChainedProxyTest extends BaseProxyTest {
         REQUESTS_RECEIVED_BY_UPSTREAM.set(0);
         TRANSPORTS_USED.clear();
         this.upstreamProxy = upstreamProxy().start();
+        System.out.println("### UPSTREAM PROXY LISTEN ADDRESS: " + this.upstreamProxy.getListenAddress());
         this.proxyServer = bootstrapProxy()
                 .withName("Downstream")
                 .withPort(0)

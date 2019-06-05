@@ -171,6 +171,7 @@ public abstract class AbstractProxyTest {
                 }
             }
 
+            System.out.println("### CONNECTING TO PORT: " +  proxyServer.getListenAddress().getPort());
             final HttpPost request = new HttpPost(resourceUrl);
             request.getParams().setParameter(
                     CoreConnectionPNames.CONNECTION_TIMEOUT, 5000);
