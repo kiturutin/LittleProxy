@@ -23,7 +23,7 @@
         <level value="warn"/>
     </logger>
     <logger name="io.netty">
-        <level value="off"/>
+        <level value="debug"/>
     </logger>
     <logger name="org.littleshoot.proxy">
         <level value="info"/>

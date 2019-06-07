@@ -719,6 +719,7 @@ public class ClientToProxyConnection extends ProxyConnection<HttpRequest> {
 
     @Override
     protected void exceptionCaught(Throwable cause) {
+        System.out.println("### EXCEPTION CAUGHT CLIENT TO PROXY FOR CHANNEL: " + channel + " AND GROUP " + this.proxyServer);
         try {
             if (cause instanceof IOException) {
                 // IOExceptions are expected errors, for example when a browser is killed and aborts a connection.
@@ -735,7 +736,6 @@ public class ClientToProxyConnection extends ProxyConnection<HttpRequest> {
         } finally {
             // always disconnect the client when an exception occurs on the channel
             disconnect();
-            throw new RuntimeException(cause);
         }
     }
 

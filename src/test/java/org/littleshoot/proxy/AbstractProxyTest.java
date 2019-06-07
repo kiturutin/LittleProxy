@@ -152,6 +152,7 @@ public abstract class AbstractProxyTest {
     protected ResponseInfo httpPostWithApacheClient(
             HttpHost host, String resourceUrl, boolean isProxied)
             throws Exception {
+        System.out.println("### SENDING REQUEST TO HOST: " + host);
         String username = getUsername();
         String password = getPassword();
         final DefaultHttpClient httpClient = TestUtils.buildHttpClient();

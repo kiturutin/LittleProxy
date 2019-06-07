@@ -70,6 +70,13 @@ public class DefaultHttpProxyServer implements HttpProxyServer {
      */
     private final ServerGroup serverGroup;
 
+    @Override
+    public String toString() {
+        return "DefaultHttpProxyServer{" +
+            "serverGroup=" + serverGroup +
+            '}';
+    }
+
     private final TransportProtocol transportProtocol;
     /*
     * The address that the server will attempt to bind to.

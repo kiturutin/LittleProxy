@@ -448,6 +448,7 @@ public class ProxyToServerConnection extends ProxyConnection<HttpResponse> {
 
     @Override
     protected void exceptionCaught(Throwable cause) {
+        System.out.println("### EXCEPTION CAUGHT PROXY TO SERVER FOR CHANNEL: " + channel + " AND GROUP: " + this.proxyServer);
         try {
             if (cause instanceof ProxyConnectException) {
                 LOG.info("A ProxyConnectException occurred on ProxyToServerConnection: " + cause.getMessage());
@@ -681,7 +682,43 @@ public class ProxyToServerConnection extends ProxyConnection<HttpResponse> {
             if (localAddress != null) {
                 return cb.connect(remoteAddress, localAddress);
             } else {
-                return cb.connect(remoteAddress);
+                System.out.println("### PROXY TO SERVER: CONNECTING TO REMOTE ADDRESS (CHAINED): " + remoteAddress);
+                ChannelFuture future = cb.connect(remoteAddress);
+                future.addListener((a) -> {
+                    if (a.isSuccess()) {
+                        System.out.println("### PROXY TO SERVER: CONNECTED!!! " + remoteAddress);
+                    } else {
+                        System.out.println("### PROXY TO SERVER: FAILED TO CONNECT!!! " + remoteAddress);
+                    }
+
+                });
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while (true) {
+                            Channel channel = ProxyToServerConnection.this.channel;
+                            if (channel != null) {
+                                System.out.println("### PROXY TO SERVER CONNECTION IS OPEN?: " + channel.isOpen());
+                                try {
+                                    Thread.sleep(100);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                if (!channel.isOpen()) {
+                                    System.out.println("### PROXY TO SERVER CHANNEL: " + channel);
+                                    System.out.println("### PROXY TO SERVER CONNECTION IS OPEN?: " + channel.isOpen());
+                                    ProxyToServerConnection.this.clientConnection.serverConnectionFailed(
+                                        ProxyToServerConnection.this, ProxyToServerConnection.this.getCurrentState(), new RuntimeException("test"));
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }).start();
+
+
+                return future;
             }
         }
     };

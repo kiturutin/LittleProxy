@@ -50,6 +50,13 @@ public class ServerGroup {
      */
     private final String name;
 
+    @Override
+    public String toString() {
+        return "ServerGroup{" +
+            "name='" + name + '\'' +
+            '}';
+    }
+
     /**
      * The ID of this server group. Forms part of the name of each thread created for this server group. Useful for
      * differentiating threads when multiple proxy instances are running.
